@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class FleetScript : MonoBehaviour
 {
-    public float moveTime = 2;
-    public float moveSpeed = 0.3f;
+    public float moveTime = 1;
+    public float moveSpeed = 0.8f;
     int moveCounter = 0;
     int moveDirection;
     public bool isGameRunning;
