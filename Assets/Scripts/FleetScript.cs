@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.SceneManagement;
 
 public class FleetScript : MonoBehaviour
 {
@@ -10,6 +12,7 @@ public class FleetScript : MonoBehaviour
     int moveCounter = 0;
     int moveDirection;
     public bool isGameRunning;
+    public TMP_Text endText;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +25,8 @@ public class FleetScript : MonoBehaviour
     {
         InvokeRepeating("Move", moveTime, moveTime);
         isGameRunning = true;
+
+        endText.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -31,12 +36,20 @@ public class FleetScript : MonoBehaviour
         {
             StopGame(true);
         }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene(0);
+        }
     }
 
     public void StopGame(bool isWin)
     {
         CancelInvoke("Move");
         isGameRunning = false;
+
+        endText.gameObject.SetActive(true);
+        endText.text = isWin ? "You win!!" : "You lose!!";
     }
 
     void Move()
